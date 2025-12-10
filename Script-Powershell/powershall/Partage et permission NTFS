@@ -1,4 +1,5 @@
 ####Partage et permission NTFS
+### cree et pertage avance le docier a la main
 
 Commandes NTFS
 Install-Module -Name NTFSSecurity -Scope CurrentUser
@@ -6,10 +7,10 @@ Import-Module NTFSSecurity
 
 
 
-ADD-NTFSAccess	=> Ajouter des permissions
-Get-NTFSAccess => Liste les permissions
-Remove-NTFSAccess => Supprimer les permissions
-Disable-ntfsAccessinheritance => Supprimer l'héritage
+#ADD-NTFSAccess	=> Ajouter des permissions
+#Get-NTFSAccess => Liste les permissions
+#Remove-NTFSAccess => Supprimer les permissions
+#Disable-ntfsAccessinheritance => Supprimer l'héritage
 
 #Listes des permissions
 #Read
@@ -26,3 +27,4 @@ Get-NTFSAccess -path "e:/dossier1/"
 
 #Supprimer les permissions
 Remove-NTFSAccess -path "e:/dossier1/" -Account "aterrieur@tssr.local" -AccessRights Modify
+
