@@ -1,0 +1,30 @@
+@echo off
+set domaine=mondom
+set extension=local
+
+REM ETAPE01
+REM DEMANDER A L USER LE NOM DU DOSSIER
+set /p dossier=Veuillez saisir le nom du dossier :
+mkdir e:\share\%dossier%
+
+REM ETAPE02
+REM On créer les 3 dossier DL (F/C/R)
+dsadd group cn=dl_Dossier_%dossier%_F,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension% -scope l
+dsadd group cn=dl_Dossier_%dossier%_C,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension% -scope l
+dsadd group cn=dl_Dossier_%dossier%_R,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension% -scope l
+
+REM ETAPE03
+REM ON DESACTIVE L HERITAGE
+icacls e:\share\%dossier% /inheritance:d
+
+REM ETAPE04
+REM on supprime utilisateur
+icacls e:\share\%dossier% /remove:g "Utilisateurs"
+
+REM ETAPE 05
+REM AJOUTER LES 3 Groupes DL_DOSSIER_xxxxxxx
+icacls e:\share\%dossier% /grant dl_Dossier_%dossier%_F:(OI)(CI)(F)
+icacls e:\share\%dossier% /grant dl_Dossier_%dossier%_C:(OI)(CI)(M)
+icacls e:\share\%dossier% /grant dl_Dossier_%dossier%_R:(OI)(CI)(RX)
+
+pause

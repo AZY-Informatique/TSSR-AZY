@@ -1,0 +1,62 @@
+@echo off
+
+SETLOCAL ENABLEDELAYEDEXPANSION 
+
+set domaine=mondom
+set extension=local
+
+REM CREATE BY PASCAL 
+REM 12/11/2025 
+REM VOTRE COMMENTAIRE 
+ 
+REM a = PRENOM
+REM b = NOM
+REM c = LOGIN
+REM d = OU
+REM e = Groupe1
+REM f = Groupe2
+REM g = PASSWORD
+
+REM ETAPE 01
+REM CREATION DES OU
+
+dsadd ou ou=@%domaine%,dc=%domaine%,dc=%extension%
+dsadd ou ou=services,ou=@%domaine%,dc=%domaine%,dc=%extension%
+dsadd ou ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension%
+dsadd ou ou=informatique,ou=services,ou=@%domaine%,dc=%domaine%,dc=%extension%
+dsadd ou ou=support,ou=services,ou=@%domaine%,dc=%domaine%,dc=%extension%
+dsadd ou ou=rh,ou=services,ou=@%domaine%,dc=%domaine%,dc=%extension%
+
+REM ETAPE 02
+REM CREATION DES GROUPES
+dsadd group cn=g_support,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension% -scope g
+dsadd group cn=g_informatique,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension% -scope g
+dsadd group cn=g_direction,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension% -scope g
+dsadd group cn=g_rh,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension% -scope g
+
+
+
+
+REM ETAPE 04
+REM CREATION DES USERS
+
+FOR /F "delims=; tokens=1-7 skip=1" %%a in (users.txt) do (
+
+
+
+IF %%f EQU vide (
+dsadd user "cn=%%a %%b,ou=%%d,ou=Services,ou=@%domaine%,dc=%domaine%,dc=%extension%" -disabled no -pwd %%g -mustchpwd no -samid %%c -upn %%c@%domaine%.%extension% -fn %%a -ln %%b -display "%%a %%b" -pwdneverexpires yes -memberof "cn=%%e,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension%" 
+) else (
+dsadd user "cn=%%a %%b,ou=%%d,ou=Services,ou=@%domaine%,dc=%domaine%,dc=%extension%" -disabled no -pwd %%g -mustchpwd no -samid %%c -upn %%c@%domaine%.%extension% -fn %%a -ln %%b -display "%%a %%b" -pwdneverexpires yes -memberof "cn=%%e,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension%" "cn=%%f,ou=groupes,ou=@%domaine%,dc=%domaine%,dc=%extension%"
+
+)
+
+
+) 
+
+
+
+
+
+
+pause
