@@ -1,0 +1,28 @@
+####Partage et permission NTFS
+
+Commandes NTFS
+Install-Module -Name NTFSSecurity -Scope CurrentUser
+Import-Module NTFSSecurity
+
+
+
+ADD-NTFSAccess	=> Ajouter des permissions
+Get-NTFSAccess => Liste les permissions
+Remove-NTFSAccess => Supprimer les permissions
+Disable-ntfsAccessinheritance => Supprimer l'héritage
+
+#Listes des permissions
+#Read
+#ReadAndExecute
+#Modify
+#FullControl
+
+#Exemple
+#Affecter des permissions
+ADD-NTFSAccess -path "e:/dossier1/" -Account "aterrieur@tssr.local" -AccessRights Modify
+
+#Listes les permissions
+Get-NTFSAccess -path "e:/dossier1/"
+
+#Supprimer les permissions
+Remove-NTFSAccess -path "e:/dossier1/" -Account "aterrieur@tssr.local" -AccessRights Modify
