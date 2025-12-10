@@ -1,0 +1,83 @@
+#CREATION OU AVEC PROTECTION
+New-ADorganizationalUnit -Name "@tssr" -path "DC=tssr,DC=local" 
+
+New-ADorganizationalUnit -Name "Production" -path "OU=@tssr,DC=tssr,DC=local" 
+
+New-ADorganizationalUnit -Name "Informatique" -path "OU=@tssr,DC=tssr,DC=local" 
+
+New-ADorganizationalUnit -Name "Groupes" -path "OU=@tssr,DC=tssr,DC=local" 
+
+
+
+#CREATION OU SANS PROTECTION
+
+New-ADorganizationalUnit -Name "@tssr" -path "DC=tssr,DC=local" -ProtectedFromAccidentalDeletion $false
+
+New-ADorganizationalUnit -Name "Production" -path "OU=@tssr,DC=tssr,DC=local" -ProtectedFromAccidentalDeletion $false
+
+New-ADorganizationalUnit -Name "Informatique" -path "OU=@tssr,DC=tssr,DC=local" -ProtectedFromAccidentalDeletion $false
+
+New-ADorganizationalUnit -Name "Groupes" -path "OU=@tssr,DC=tssr,DC=local" -ProtectedFromAccidentalDeletion $false
+
+
+#Effacer une OU => 
+Remove-ADorganizationalUnit –Identity "OU=Groupes,OU=@tssr,DC=tssr,DC=local"
+
+#Effacer une OU PARENT et ses OU ENFANT=> 
+Remove-ADorganizationalUnit –Identity "OU=@tssr,DC=tssr,DC=local" -recursive
+
+commandes AD - GROUPES
+
+#Créer un groupe global
+New-ADGroup -name "g_production" -path "OU=Groupes,ou=@tssr,dc=tssr,dc=local" -GroupScope Global
+
+#Créer un groupe domaine local
+New-ADGroup -name "dl_dossier_prod_F" -path "OU=Groupes,ou=@tssr,dc=tssr,dc=local" -GroupScope DomainLocal
+
+#Supprimer un groupe
+Remove-ADGroup -Identity "dl_dossier_prod_f" -Confirm:$false
+
+#Ajouter des utilisateur dans un groupe
+Add-ADGroupMember -identity "g_production" -Members "slot","aterrieur"
+
+#Afficher les membres d'un groupe
+Get-AdGroupMember -identity "g_production" | select name, samAccountName
+
+#Afficher tous les groupes
+Get-ADGroup -Filter *
+
+#Afficher tous les groupes dans le nom commence par g_
+get-adgroup -filter {Name -like "g_*"}
+
+#Afficher tous les groupes de l'OU Groupes
+Get-ADGroup -Filter * -SearchBase "OU=Groupes,OU=@tssr,DC=tssr,DC=local"
+
+#Retirer les membres d'un groupe
+Remove-ADGroupMember -identity "g_production" -Members "slot","aterrieur" -confirm:$false
+
+
+#Commandes AD - user
+
+New-ADUser -Name "Alex Terrieur" `
+           -DisplayName "Terrieur Alex" `
+           -GivenName "Alex" `
+           -Surname "Terrieur" `
+           -SamAccountName "aterrieur" `
+           -UserPrincipalName "aterrieur@tssr.local" `
+           -Path "OU=Production,OU=@tssr,DC=tssr,DC=LOCAL" `
+           -AccountPassword(ConvertTo-SecureString -AsPlainText "Reponse2025" -Force) `
+           -ChangePasswordAtLogon $false `
+           -Enabled $true
+
+
+New-ADUser -Name "Samantha Lot" `
+           -DisplayName "Lot Samantha" `
+           -GivenName "Samantha" `
+           -Surname "Lot" `
+           -SamAccountName "slot" `
+           -UserPrincipalName "slot@tssr.local" `
+           -Path "OU=Production,OU=@tssr,DC=tssr,DC=LOCAL" `
+           -AccountPassword(ConvertTo-SecureString -AsPlainText "Reponse2025" -Force) `
+           -ChangePasswordAtLogon $false `
+           -Enabled $true
+
