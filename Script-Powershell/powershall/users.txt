@@ -1,0 +1,7 @@
+PRENOM;NOM;LOGIN;PASSWORD;OU;GROUPE1;GROUPE2;ITINERANT 
+Alain;TERRIEUR;aterrieur;Reponse2025;compta;g_comptable;g_direction;0
+Samantha;LOT;slot;Reponse2025;compta;g_comptable;vide;1
+Jean;EMARE;jemare;Reponse2025;dsi;g_informatique;vide;0
+Tom;HAT;that;Reponse2025;production;g_production;g_direction;1
+Annie;VERSAIRE;aversaire;Reponse2025;dsi;g_informatique;g_direction;1
+Barack;AFRIT;bafrit;Reponse2025;production;g_production;vide;0
