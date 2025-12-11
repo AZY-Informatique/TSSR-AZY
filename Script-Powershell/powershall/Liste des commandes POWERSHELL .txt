@@ -1,0 +1,40 @@
+##################################################
+
+Liste des commandes POWERSHELL 
+
+Le partage
+
+Get-smbshare => Liste des partages réseaux
+New-smbshare => Creer un nouveau partage
+Remove-smbshare => supprime le partage
+Grant-smbshareaccess = Modifier les autorisations de partage
+revoke-smbshareaccess = Supprimer les autorisations de partage
+Get-smbshareaccess => liste les autorisations de partage
+new-smbmapping => Mapper un lecteur réseau
+
+Exemple
+Partage un dossier
+New-smbshare -path "e:\partage" -name "partagewin10" -ReadAccess "toto","titi" -FullAccess "tutu"
+
+Controle total => fullaccess
+Lecture => readaccess
+Modifer => Modifyaccess 
+
+#Ajouter des permissions
+Grant-smbshareaccess -name "partagewin10" -AccountName "gege" -AccessRight Full -force
+Controle total => full
+Lecture => read
+Modifer => Modify
+
+#Supprimer des permission
+Revoke-smbshareaccess -name "partagewin10" -AccountName "gege" -force
+Controle total => full
+Lecture => read
+Modifer => Modify
+
+
+#Supprimer un partage reseau
+Remove-smbshare -name "partagewin10"
+
+#Mapper un lecteur
+new-smbmapping -localpath 'p:' -Remotepath '\\ad01\partage'
