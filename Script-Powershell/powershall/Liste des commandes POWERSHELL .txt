@@ -24,17 +24,18 @@ Modifer => Modifyaccess
 Grant-smbshareaccess -name "partagewin10" -AccountName "gege" -AccessRight Full -force
 Controle total => full
 Lecture => read
-Modifer => Modify
+Modifer => change
 
 #Supprimer des permission
 Revoke-smbshareaccess -name "partagewin10" -AccountName "gege" -force
 Controle total => full
 Lecture => read
-Modifer => Modify
+Modifer => change
 
 
 #Supprimer un partage reseau
 Remove-smbshare -name "partagewin10"
 
 #Mapper un lecteur
+
 new-smbmapping -localpath 'p:' -Remotepath '\\ad01\partage'
