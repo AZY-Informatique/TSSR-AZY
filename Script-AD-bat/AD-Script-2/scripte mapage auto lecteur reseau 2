@@ -1,0 +1,60 @@
+Voici un script simple (et compréhensible) pour mapper automatiquement un lecteur réseau sous Windows.
+
+---
+
+### 📜 Script Batch (.bat)
+
+```bat
+@echo off
+REM Lettre du lecteur (ex: Z:)
+set DRIVE=Z:
+
+REM Chemin du partage réseau
+set SHARE=\\serveur\partage
+
+REM Identifiants (optionnel)
+set USER=nom_utilisateur
+set PASSWORD=mot_de_passe
+
+echo Connexion du lecteur réseau...
+
+REM Mapper le lecteur
+net use %DRIVE% %SHARE% /user:%USER% %PASSWORD% /persistent:yes
+
+echo Lecteur %DRIVE% connecté à %SHARE%
+pause
+```
+
+---
+
+### ⚙️ Explication rapide
+
+* `DRIVE` → la lettre du lecteur (ex: Z:)
+* `SHARE` → chemin réseau (ex: `\\192.168.1.10\dossiers`)
+* `/persistent:yes` → reconnecte automatiquement au démarrage
+* `USER` / `PASSWORD` → facultatif si déjà authentifié
+
+---
+
+### ✅ Version encore plus simple (sans identifiants)
+
+```bat
+@echo off
+net use Z: \\serveur\partage /persistent:yes
+```
+
+---
+
+### 🚀 Lancer automatiquement au démarrage
+
+1. Appuie sur `Win + R`
+2. Tape `shell:startup`
+3. Colle ton fichier `.bat` dedans
+
+---
+
+### 💡 Option PowerShell (moderne)
+
+```powershell
+New-PSDrive -Name "Z" -PSProvider FileSystem -Root "\\serveur\partage" -Persist
+```
