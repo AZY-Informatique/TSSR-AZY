@@ -1,0 +1,79 @@
+D’accord — tu veux un script **simple + propre** qui se lance automatiquement à la connexion et mappe un lecteur réseau (type GPO). Voici une version claire et prête à utiliser 👇
+
+---
+
+## 📜 Script Batch (connexion automatique)
+
+@echo off
+
+REM === Configuration ===
+set DRIVE=Z:
+set SHARE=\serveur\DossierGPO
+
+REM === Suppression ancienne connexion (évite les erreurs) ===
+net use %DRIVE% /delete /yes >nul 2>&1
+
+REM === Mapping du lecteur ===
+net use %DRIVE% %SHARE% /persistent:yes
+
+REM === Vérification ===
+if %errorlevel%==0 (
+echo Lecteur %DRIVE% connecte avec succes
+) else (
+echo Erreur de connexion au lecteur reseau
+)
+
+---
+
+## ⚙️ Comment ça marche
+
+* Supprime l’ancien lecteur (évite conflits)
+* Map automatiquement `Z:` vers le dossier réseau
+* Se reconnecte à chaque ouverture de session
+* L’utilisateur voit directement son dossier (comme une GPO)
+
+---
+
+## 🚀 Lancer automatiquement à la connexion utilisateur
+
+### Méthode simple (sans GPO)
+
+1. `Win + R`
+2. Tape 👉 `shell:startup`
+3. Colle ton script `.bat` dedans
+
+👉 Résultat : à chaque connexion, le lecteur apparaît automatiquement
+
+---
+
+## 🏢 Méthode pro (comme une vraie GPO)
+
+Si tu es en domaine Active Directory :
+
+1. Ouvre `gpmc.msc`
+2. Va dans :
+
+   ```
+   Configuration utilisateur
+   → Scripts (Ouverture de session)
+   ```
+3. Ajoute ton script `.bat`
+
+👉 Là, ça agit exactement comme une GPO
+
+---
+
+## 💡 Variante avec identifiants (si besoin)
+
+net use Z: \serveur\DossierGPO /user:domaine\utilisateur motdepasse /persistent:yes
+
+---
+
+## ✅ Résultat final
+
+* L’utilisateur se connecte à son PC
+* Le script se lance automatiquement
+* Le lecteur réseau apparaît directement dans l’explorateur
+* Il voit son **dossier GPO** sans rien faire
+
+---
