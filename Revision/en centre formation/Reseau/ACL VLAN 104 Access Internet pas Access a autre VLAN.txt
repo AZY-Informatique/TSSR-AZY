@@ -1,0 +1,27 @@
+!!!1er metode
+
+en
+conf t
+access-list 10 permit 192.168.104.0 0.0.0.255
+access-list 10 deny 192.168.0.0 0.0.255.255
+access-list 10 permit any
+
+interface vlan 104
+ip access-group 10 out
+
+
+
+
+!!!2eme metode
+
+access-list 21 deny 192.168.104.0 0.0.0.255
+access-list 21 permit any
+
+interface vlan 99
+ip access-group 21 out
+interface vlan 101
+ip access-group 21 out
+interface vlan 102
+ip access-group 21 out
+interface vlan 103
+ip access-group 21 out

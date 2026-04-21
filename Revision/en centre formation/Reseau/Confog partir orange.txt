@@ -1,0 +1,83 @@
+
+!!!sur le 1841
+!!!On retire l'adresse lOOPBACK
+en
+conf t
+no int l0
+
+int fa0/1
+no shut
+ip address dhcp
+
+====================================================================
+!!!sur 2911 - ORANGE
+
+en
+conf t
+hostname Orange
+int G0/1
+ip address 142.251.255.254 255.255.0.0
+no shutdown
+int G0/2
+ip address 8.255.255.254 255.0.0.0
+no shutdown
+int g0/0
+ip address 50.50.50.50 255.0.0.0
+no shut
+exit
+ip DHCP pool POOL_Orange
+network 50.0.0.0 255.0.0.0
+default-router 50.50.50.50
+dns-server 8.8.8.8
+
+=========================================
+
+
+!!!pour voir les conf de cette interface 
+show ip int fa0/1
+
+
+
+
+======================================
+
+
+ROUTEUR 1841
+
+en
+conf t
+int fa0/0
+ip address 10.0.0.2 255.255.255.252
+no shutdown
+exit
+
+int fa0/1
+no shut
+ip address dhcp
+
+!!routage static ( pour reture )
+ip route 192.168.0.0 255.255.0.0 10.0.0.1
+ip route 0.0.0.0 0.0.0.0 fa0/1
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+Ajout nat sur Routeur 1841
++++++++++++++++++++++++++++++++++++++++++++++++++
+!!etape 01 - Declarer si les cartes reseaux de R1841 sont inside ou outside
+en
+conf t
+int fa0/0
+ip nat inside
+int fa0/1
+ip nat outside
+exit
+
+
+!!etape 02 - Faire une acl pour specifier les reseaux autorisés à etre nat
+
+access-list 5 permit 192.168.0.0 0.0.255.255
+access-list 5 permit 10.0.0.0 0.255.255.255
+
+!!etape 03 - on nat l'interfce fa0/1
+
+ip nat inside source list 5 interface fa0/1 overload

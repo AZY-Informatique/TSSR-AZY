@@ -1,0 +1,62 @@
+Pour ramplacer sw 0 niveau2 avec niveau 3
+
+!!!Switch Niveau 3 
+en
+conf t
+hostname SW00-haut
+vlan 101
+name client
+vlan 102
+name serveur
+vlan 103
+name invite
+vlan 99
+name gestion
+exit
+interface range fa0/1 - 24
+switch trunk encapsulation dot1q
+switch mode trunk
+switch trunk allowed vlan all
+exit
+interface vlan 101
+ip address 192.168.101.254 255.255.255.0
+interface vlan 102
+ip address 192.168.102.254 255.255.255.0
+interface vlan 103
+ip address 192.168.103.254 255.255.255.0
+interface vlan 99
+ip address 192.168.99.254 255.255.255.0
+exit
+ip routing
+
+!!liaison avec le routeur
+int gi0/1
+no switchport
+ip address 10.0.0.1 255.255.255.252
+exit
+!! routage static
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+
+
+===============
+!!!ROUTEUR 
+en
+conf t
+ no interface fa0/0.101
+ no interface fa0/0.102
+ no interface fa0/0.103
+ no interface fa0/0.99
+
+!!liaison avec le switch n3
+en
+conf t
+int fa0/0
+ip address 10.0.0.2 255.255.255.252
+no shutdown
+exit
+
+!!routage static
+ip route 192.168.0.0 255.255.0.0 10.0.0.1
+!!ip route 0.0.0.0 0.0.0.0 fa0/1
+
+==================================
