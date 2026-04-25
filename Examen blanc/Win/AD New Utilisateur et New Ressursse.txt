@@ -1,0 +1,69 @@
+TP MICROSOFT
+TP01
+Jean Sairien vient d'intégrer le service informatique
+Ajouter cet utilisateur dans l'AD 
+attention Jean doit avoir un profil Itinérant
+
+TP MICROSOFT
+
+Jean Sairien vient d'intégrer le service informatique
+Ajouter cet utilisateur dans l'AD 
+attention Jean doit avoir un profil Itinérant
+
+la je test un 2eme
+Azy Basir
+
+attention je doit suivre les regle de prenome nom min au magescule.
+
+Itinérant; si je voudrais que utilisateur avoir une Z ou profile Itinérant et peux ouvrir dans tout le pc intgre dans domine mais sans Itinérant ces data enragistre dans stockage de local de pc mais utulisateur peux pas trouvez cest donne en changent son ordir.
+
+TP02
+Creer un utilisateur nommé stagiaire1 dans l'OU informatique
+
+TP03
+Créer  dans le dossier Partage un dossier "Ressources"
+Tous les employeés de l'entreprise pourront y accéder (sauf les stagiaires).
+Les membres de direction pourront modifier
+
+Faire un mappage Reseau du dossier Ressources avec la lettre R
+
+Etape 01
+Creer les 3 groupes de Domaine Local
+dl_ressources_F
+dl_ressources_C
+dl_ressources_R
+
+g_direction => dl_ressources_C
+les autres groupes => dl_ressources_R
+
+creer un groupe global g_stagiaires et ajouter stagiaire1
+
+Etape 02
+Creer un dossier Ressources
+Le partage : Autorisation - TOUT LE MONDE en Control Total
+
+NTFS
+-On ajoute
+dl_ressources_F => CT
+dl_ressources_C =>Modification
+dl_ressources_R =>Lecture
+-On retire
+Utilisateurs
+
+Etape 03
+Gpo => Positionner dans @examen
+
+On attribue la lettre R AU dossier
+
+option1
+Delegation pour :
+g_direction
+g_production
+g_comptable
+g_informatique
+
+option2
+Delegation refuser : g_stagiaire
+
+correction video
+https://www.swisstransfer.com/d/b5afb38a-13f3-4dd8-8efa-e9083381d4f9
