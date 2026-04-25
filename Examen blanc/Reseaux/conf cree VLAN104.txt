@@ -1,0 +1,51 @@
+Pour ajouter un Vlan 104 sur switch Gauche 
+
+!!!Switch 1
+
+!!!AJOUT VLAN 104
+!!!SUR SWITCH GAUCHE
+
+en
+conf t
+vlan 104
+name labo
+exit
+interface fa0/23
+switchport mode access
+switchport access vlan 104
+exit
+
+===============
+!!!Switch N 3, SUR SWITCH COEUR
+
+en
+conf t
+vlan 104
+name labo
+exit
+interface vlan 104
+ip address 192.168.104.254 255.255.255.0
+exit
+
+===============
+
+!!!SUR SWITCH DROITE
+
+en
+conf t
+vlan 104
+name labo
+
+
+===============
+!!!PC
+
+ip
+ 192.168.104.1
+gw
+192.168.104.254
+
+
+
+
+

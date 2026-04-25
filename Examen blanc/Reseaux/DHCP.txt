@@ -1,0 +1,10 @@
+!!!Configuration d'un relai DHCP pour que le serveur DHCP 192.168.102.104 distribue des adresses IP au pc du vlan 104
+
+!!!sur sw niv3
+
+EN
+CONF T
+INTERFACE VLAN 104
+ip helper-address 192.168.102.201
+
+
