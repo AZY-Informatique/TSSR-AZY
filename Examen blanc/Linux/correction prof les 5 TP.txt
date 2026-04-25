@@ -1,0 +1,125 @@
+TP Linux
+
+Sur Lx01
+A faire crééer 3 users linux nommé : neymar , pele , platini
+Creer 3 groupes linux nommé Bresil , France , Football
+
+Bresil doit etre le groupe principal de neymar et pele
+France doit etre le groupe principal de platini
+les 3 users font aussi partie du groupe football
+
+groupadd bresil
+groupadd france
+groupadd football
+
+adduser neymar
+adduser pele
+adduser platini
+
+usermod -g bresil neymar
+usermod -g bresil pele
+usermod -g france su plaplatini
+
+usermod -aG football neymar
+usermod -aG football pele
+usermod -aG football platini
+
+su platini
+cd /tmp
+nano fifa.txt
+bla bla
+bla bla
+
+su -
+cd /tmp
+chown platini:bresil fifa.txt
+chmod 740 fifa.txt
+
+LA SUITE
+
+-Creer avec l'utiliateur platini dans /tmp un fichier fifa.txt
+on ajoute 2 lignes dans le fichier
+
+se connecter en root => su -
+
+-Change de proprietaire
+platini : bresil  fifa.txt
+
+-change les droits 740 sur fifa.txt
+-Se connecter avec pele puis faire cat /tmp/fifa.txt
+
+Que voyez vous ?
+
+=================================
+TP 02
+A faire en Root sans quitter le dossier /root
+cd
+
+etape01
+Creer dans /tmp un dossier labo
+mkdir /tmp/labo
+
+etape02
+Ajouter 2 fichiers dans labo (f1.txt et f2.txt)
+touch /tmp/labo/f1.txt /tmp/labo/f2.txt
+
+etape03
+renommer f1.txt en Fichier1.txt
+mv /tmp/labo/f1.txt /tmp/labo/Fichier1.txt
+
+etape04
+renommer dossier labo en production
+mv /tmp/labo /tmp/production
+
+etape05
+Deplacer production dans /root
+mv /tmp/production /root/production
+
+==========================================
+TP03 - Sans sortir de /root
+-Changer le nom de LX01 en LXUN
+nano /etc/hostname
+nano /etc/hosts
+
+-Changer le DNS actuel de LXUN par 192.168.240.240
+nano /etc/resolv.conf
+
+
+-Changer l'IP de LXUN  par 192.168.240.241
+nano /etc/network/interfaces
+
+==========================================
+TP04 - Faire un script qui compresse en Tar le dossier /root/production dans le dossier /var/local
+
+# Compresser un dossier et son contenu au format .tar.gz
+tar -czf <nom_archive.tar.gz> <dossier/fichier_a_compresser>
+
+
+#!/bin/bash
+tar -czf /var/local/prod.tar.gz /root/production
+
+==========================================
+TP05 - A faire sur Lx02 (vous aurez besoin du DNS  sur AD)
+
+A partir de AD
+ssh tech@192.168.240.252
+su -
+
+
+-Reactiver la config par default (000-default.conf) de apache2
+a2ensite 000-default.conf
+
+-l'application glpi sur lx02
+doit etre accessible par http://glpi.examen.labo
+
+nano /etc/apache2/sites-available/support.examen.labo.conf
+
+-On change la ligne servername
+ServerName glpi.examen.labo
+
+-On redemarre Aapche2
+systemctl restart apache2
+
+
+-on va sur le DNS de l'AD
+on ajoute un alias (CNAME) de lx02 nommé glpi 
