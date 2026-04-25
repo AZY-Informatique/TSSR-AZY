@@ -1,0 +1,65 @@
+TP Linux
+
+Sur Lx01
+A faire crééer 3 users linux nommé : neymar , pele , platini
+Creer 3 groupes linux nommé Bresil , France , Football
+
+Bresil doit etre le groupe principal de neymar et pele
+France doit etre le groupe principal de platini
+les 3 users font aussi partie du groupe football
+
+groupadd bresil
+groupadd france
+groupadd football
+
+adduser neymar
+adduser pele
+adduser platini
+
+usermod -g bresil neymar
+usermod -g bresil pele
+usermod -g france su plaplatini
+
+usermod -aG football neymar
+usermod -aG football pele
+usermod -aG football platini
+
+su platini
+cd /tmp
+nano fifa.txt
+bla bla
+bla bla
+
+su -
+cd /tmp
+chown platini:bresil fifa.txt
+chmod 740 fifa.txt
+
+
+
+
+-Creer avec l'utiliateur platini dans /tmp un fichier fifa.txt
+on ajoute 2 lignes dans le fichier
+
+se connecter en root => su -
+
+-Change de de proprietaire
+platini : bresil  fifa.txt
+
+
+-change les droits 740 sur fifa.txt
+
+-Se connecter avec pele puis faire cat /tmp/fifa.txt
+
+Que voyez vous ?
+
+
+Pour voir les user de Group Bresil c'est mieu de faie comme ca
+
+usermod -aG bresil neymar
+usermod -aG bresil pele
+usermod -aG france su plaplatini
+
+usermod -aG football neymar
+usermod -aG football pele
+usermod -aG football platini
