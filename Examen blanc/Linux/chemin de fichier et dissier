@@ -1,0 +1,54 @@
+📁 Fichiers à modifier
+1. Hostname principal
+sudo /etc/hostname
+sudo /etc/hosts
+
+
+intranet.conf
+  sudo /etc/apache2/site-avilibale/intranet.conf
+
+dhcp et dhcpd
+sudo /etc/dhcp/dhcpd.conf
+
+📁 1. Configuration réseau classique (Debian / Ubuntu anciens)
+/etc/network/interfaces
+👉 Fichier principal pour configurer IP, passerelle, etc.
+/etc/network/interfaces.d/
+👉 Fichiers supplémentaires inclus
+
+Résolution DNS
+/etc/resolv.conf
+👉 serveurs DNS
+
+📁 Fichiers principaux (ISC DHCP)
+🔧 Configuration
+/etc/dhcp/dhcpd.conf → fichier principal de configuration
+📊 Fichier des baux (leases)
+/var/lib/dhcp/dhcpd.leases
+(parfois /var/lib/dhcpd/dhcpd.leases selon la distribution)
+▶️ Binaire du service
+/usr/sbin/dhcpd
+⚙️ Fichier de service (systemd)
+/lib/systemd/system/isc-dhcp-server.service (Debian/Ubuntu)
+ou /usr/lib/systemd/system/dhcpd.service (RHEL/CentOS)
+📌 Fichier optionnel (interface réseau)
+/etc/default/isc-dhcp-server (Debian/Ubuntu)
+👉 permet de définir sur quelle interface le DHCP écoute (ex: eth0)
+
+🧠 Alternatives modernes
+
+Sur certaines distributions récentes, Kea DHCP remplace ISC DHCP :
+
+Config : /etc/kea/kea-dhcp4.conf
+Service : kea-dhcp4
+
+Commende de restart
+# vérifier le statut
+systemctl status isc-dhcp-server
+
+# démarrer / arrêter
+systemctl start isc-dhcp-server
+systemctl stop isc-dhcp-server
+
+# recharger la config
+systemctl restart isc-dhcp-server
