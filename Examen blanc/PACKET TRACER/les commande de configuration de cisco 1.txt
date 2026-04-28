@@ -1,0 +1,395 @@
+SW1
+
+Enable
+Conf t
+Hostname SW1
+!!CREATION VLAN 10 –20
+VLAN 10
+NAME 10-Red
+VLAN 20
+NAME 20-Pink
+VLAN 417
+NAME gestion
+EXIT
+
+!!MDP Switch Client
+conf t
+!!mode client VTP
+vtp mode client
+!!même domaine que serveur
+vtp domain TSSR
+!!même mot de passe
+vtp password cisco 
+
+
+interface range fa0/1-10
+No shutdown
+!!AFFECTATION VLAN 10 AU INTERFACE FA0/1 à FA0/10
+INTERFACE RANGE FA0/1-10
+SWITCHPORT MODE ACCESS
+SWITCHPORT ACCESS VLAN 10
+
+!!AFFECTATION VLAN 20 AU INTERFACE FA0/11 à FA0/20
+interface range fa0/11-20
+No shutdown
+INTERFACE RANGE FA0/11-20
+SWITCHPORT MODE ACCESS
+SWITCHPORT ACCESS VLAN 20
+
+!!TRUNK INTERFACE gi0/1
+INTERFACE gi0/1
+SWITCHPORT MODE TRUNK
+SWITCHPORT TRUNK ALLOWED VLAN ALL
+
+Interface range fa0/21-23
+shutdown
+
+INTERFACE gi0/2
+shutdown
+
+!!Active la Porte Pour gestion
+Interface fa0/24
+no shutdown
+
+!!AFFECTATION VLAN 417 AU INTERFACE FA0/24
+Interface fa0/24
+SWITCHPORT MODE ACCESS
+SWITCHPORT ACCESS VLAN 417
+
+
+INT VLAN 417
+IP ADD 192.168.4.253 255.255.255.0
+
+!!Porte security avec @mac de PC
+int fa0/1
+switchport port-security
+switchport port-security mac-address sticky
+switchport port-security violation shutdown
+
+exit
+exit
+
+!!SSH
+
+!!Passe en mode privilégié
+enable                                              
+
+!!Passe en mode configuration globale
+conf t                                              
+
+!!Définit le mot de passe du mode privilégié
+enable secret cisco                                   
+
+!!Définit le nom de domaine (obligatoire pour SSH)
+ip domain-name tssr.greta                         
+
+!!Génère les clés RSA (2048 bits)
+crypto key generate rsa general-keys modulus 2048   
+
+!!Force l'utilisation de SSH v2 (sécurisé)
+ip ssh version 2                                    
+
+!!Active le modèle AAA
+aaa new-model                                       
+
+!!Authentification via la base locale
+aaa authentication login default local              
+
+!!Autorisation d'accès au mode EXEC
+aaa authorization exec default local                
+
+!!Crée un utilisateur local avec mot de passe chiffré
+username azy secret cisco                   
+
+!!Autorise uniquement le réseau 192.168.4.0/24 dan vlan 417 ip vlan 192.168.4.17/24
+access-list 22 permit 192.168.4.0 0.0.0.255        
+
+!!Configure toutes les lignes VTY (accès distant)
+line vty 0 15                                       
+
+!!Utilise la base locale pour l'authentification
+login local                                         
+
+!!Autorise uniquement SSH (désactive TELNET)
+transport input ssh                                 
+
+!!Applique l'ACL sur les connexions entrantes
+access-class 22 in                                  
+
+!!Quitte le mode configuration
+end                                                 
+
+!!Sauvegarde la configuration
+write memory                                        
+
+
+
+
+do show vlan
+show vlan
+
+show running-config 
+=========================================
+SW2
+
+Enable
+Conf t
+Hostname SW2
+!!CREATION VLAN 10 –20
+VLAN 10
+NAME 10-Red
+VLAN 20
+NAME 20-Pink
+VLAN 417
+NAME gestion
+EXIT
+
+!!MDP Switch Client
+conf t
+!!mode client VTP
+vtp mode client
+!!même domaine que serveur
+vtp domain TSSR
+!!même mot de passe
+vtp password cisco 
+
+
+interface range fa0/1-10
+No shutdown
+!!AFFECTATION VLAN 10 AU INTERFACE FA0/1 à FA0/10
+INTERFACE RANGE FA0/1-10
+SWITCHPORT MODE ACCESS
+SWITCHPORT ACCESS VLAN 10
+
+!!AFFECTATION VLAN 20 AU INTERFACE FA0/11 à FA0/20
+interface range fa0/11-20
+No shutdown
+INTERFACE RANGE FA0/11-20
+SWITCHPORT MODE ACCESS
+SWITCHPORT ACCESS VLAN 20
+
+!!TRUNK INTERFACE gi0/1
+INTERFACE gi0/1
+SWITCHPORT MODE TRUNK
+SWITCHPORT TRUNK ALLOWED VLAN ALL
+
+Interface range fa0/21-23
+shutdown
+
+INTERFACE gi0/2
+shutdown
+
+!!Active la Porte Pour gestion
+Interface fa0/24
+no shutdown
+
+!!AFFECTATION VLAN 417 AU INTERFACE FA0/24
+Interface fa0/24
+SWITCHPORT MODE ACCESS
+SWITCHPORT ACCESS VLAN 417
+
+
+INT VLAN 417
+IP ADD 192.168.4.252 255.255.255.0
+
+!!Porte security avec @mac de PC
+int fa0/1
+switchport port-security
+switchport port-security mac-address sticky
+switchport port-security violation shutdown
+
+exit
+exit
+
+!!SSH
+
+!!Passe en mode privilégié
+enable                                              
+
+!!Passe en mode configuration globale
+conf t                                              
+
+!!Définit le mot de passe du mode privilégié
+enable secret cisco                                 
+
+!!Définit le nom de domaine (obligatoire pour SSH)
+ip domain-name tssr.greta                         
+
+!!Génère les clés RSA (2048 bits)
+crypto key generate rsa general-keys modulus 2048   
+
+!!Force l'utilisation de SSH v2 (sécurisé)
+ip ssh version 2                                    
+
+!!Active le modèle AAA
+aaa new-model                                       
+
+!!Authentification via la base locale
+aaa authentication login default local              
+
+!!Autorisation d'accès au mode EXEC
+aaa authorization exec default local                
+
+!!Crée un utilisateur local avec mot de passe chiffré
+username azy secret cisco                   
+
+!!Autorise uniquement le réseau 192.168.4.0/24 dan vlan 417 ip vlan 192.168.4.17/24
+access-list 22 permit 192.168.4.0 0.0.0.255      
+!!Autorise uniquement le réseau 192.168.4.0/24 dan vlan 417 ip vlan 192.168.4.17/24
+access-list 22 permit 192.168.4.0 0.0.0.255        
+
+!!Configure toutes les lignes VTY (accès distant)
+line vty 0 15                                       
+
+!!Utilise la base locale pour l'authentification
+login local                                         
+
+!!Autorise uniquement SSH (désactive TELNET)
+transport input ssh                                 
+
+!!Applique l'ACL sur les connexions entrantes
+access-class 22 in                                  
+
+!!Quitte le mode configuration
+end                                                 
+
+!!Sauvegarde la configuration
+write memory                                        
+
+
+
+
+do show vlan
+show vlan
+
+show running-config
+
+========================================
+Switch Cœur (Serveur) SW3
+
+Enable
+Conf t
+Hostname SW3
+
+!!CREATION VLAN 10 –20
+VLAN 10
+NAME 10-Red
+VLAN 20
+NAME 20-Pink
+VLAN 417
+NAME gestion
+EXIT
+
+!!MDP pour SW Coeur
+conf t
+!!mode serveur VTP
+vtp mode server
+!!définir domaine
+vtp domain TSSR
+!!mot de passe VTP
+vtp password cisco
+
+
+!!TRUNK INTERFACE gi0/1
+INTERFACE gi0/1
+no shutdown
+SWITCHPORT TRUNK encap dot1q
+SWITCHPORT MODE TRUNK
+SWITCHPORT TRUNK ALLOWED VLAN ALL
+
+!!TRUNK INTERFACE gi0/2
+INTERFACE gi0/2
+no shutdown
+SWITCHPORT TRUNK encap dot1q
+SWITCHPORT MODE TRUNK
+SWITCHPORT TRUNK ALLOWED VLAN ALL
+
+ip routing
+
+Interface range fa0/1-23
+shutdown
+
+!!Active la Porte Pour gestion
+Interface fa0/24
+no shutdown
+!!AFFECTATION VLAN 417 AU INTERFACE FA0/24
+Interface fa0/24
+SWITCHPORT MODE ACCESS
+SWITCHPORT ACCESS VLAN 417
+!!gw
+INT VLAN 417
+IP ADD 192.168.4.254 255.255.255.0
+!!gw
+INT VLAN 10
+IP ADD 192.168.10.254 255.255.255.0
+!!gw
+INT VLAN 20
+IP ADD 192.168.20.254 255.255.255.0
+
+!!SSH
+
+!!Passe en mode privilégié
+enable                                              
+
+!!Passe en mode configuration globale
+conf t                                              
+
+!!Définit le mot de passe du mode privilégié
+enable secret cisco                                 
+
+!!Définit le nom de domaine (obligatoire pour SSH)
+ip domain-name tssr.greta                         
+
+!!Génère les clés RSA (2048 bits)
+crypto key generate rsa general-keys modulus 2048   
+
+!!Force l'utilisation de SSH v2 (sécurisé)
+ip ssh version 2                                    
+
+!!Active le modèle AAA
+aaa new-model                                       
+
+!!Authentification via la base locale
+aaa authentication login default local              
+
+!!Autorisation d'accès au mode EXEC
+aaa authorization exec default local                
+
+!!Crée un utilisateur local avec mot de passe chiffré
+username azy secret cisco                   
+
+!!Autorise uniquement le réseau 192.168.4.0/24 dan vlan 417 ip vlan passrelle 192.168.4.254/24
+access-list 22 permit 192.168.4.0 0.0.0.255        
+
+!!Configure toutes les lignes VTY (accès distant)
+line vty 0 15                                       
+
+!!Utilise la base locale pour l'authentification
+login local                                         
+
+!!Autorise uniquement SSH (désactive TELNET)
+transport input ssh                                 
+
+!!Applique l'ACL sur les connexions entrantes
+access-class 22 in                                  
+
+!!Quitte le mode configuration
+end                                                 
+
+!!Sauvegarde la configuration
+write memory
+
+do show vlan
+================================================================================================
+================================================================================================
+
+Sur PC
+
+Ajouter ip dans la meme vlan
+192.168.10.1
+
+GW dans la meme vlan 254 a la fin 
+192.168.10.254 ip de SW3
+
+et sur le 3 Switch ip diffrent 
+
