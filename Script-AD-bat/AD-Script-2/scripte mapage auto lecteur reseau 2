@@ -13,6 +13,17 @@ ou
 New-PSDrive -Name Z -PSProvider FileSystem -Root "\\AD01\partage"
 script.ps1
 
+
+gpupdate /force
+
+
+ipconfig /release
+ipconfig /renew
+
+
+
+
+
 ### 📜 Script Batch (.bat)
 
 ```bat
