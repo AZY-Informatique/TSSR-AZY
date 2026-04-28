@@ -1,10 +1,17 @@
 Voici un script simple (et compréhensible) pour mapper automatiquement un lecteur réseau sous Windows.
 
 ---
-```bat
+🖥️ Dans CMD
 @echo off
 net user Z:\\AD01\partage
+script.bat
+script.cmd
 
+⚙️ Dans PowerShell
+net use Z: \\AD01\partage
+ou
+New-PSDrive -Name Z -PSProvider FileSystem -Root "\\AD01\partage"
+script.ps1
 
 ### 📜 Script Batch (.bat)
 
