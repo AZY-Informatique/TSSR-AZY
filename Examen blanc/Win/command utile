@@ -1,0 +1,25 @@
+sert à forcer la mise à jour des stratégies de groupe dans Group Policy sous Windows.
+cmd
+  gpupdate /force
+
+🔓 1. ipconfig /release
+
+👉 Libère l’adresse IP actuelle
+
+ipconfig /release
+
+📌 Effet :
+
+Ton PC perd son adresse IP
+Il ne communique plus sur le réseau local (temporairement)
+
+🔄 2. ipconfig /renew
+
+👉 Demande une nouvelle adresse IP au serveur DHCP
+
+ipconfig /renew
+
+  📌 Effet :
+
+Le PC contacte un serveur DHCP
+Il récupère une nouvelle IP
