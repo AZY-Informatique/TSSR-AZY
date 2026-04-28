@@ -16,7 +16,7 @@ script.ps1
 
 gpupdate /force
 
-
+pour ip dhcp
 ipconfig /release
 ipconfig /renew
 
