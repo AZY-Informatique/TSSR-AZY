@@ -1,6 +1,10 @@
 Voici un script simple (et compréhensible) pour mapper automatiquement un lecteur réseau sous Windows.
 
 ---
+```bat
+@echo off
+net user Z:\\AD01\partage
+
 
 ### 📜 Script Batch (.bat)
 
