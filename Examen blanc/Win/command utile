@@ -23,3 +23,7 @@ ipconfig /renew
 
 Le PC contacte un serveur DHCP
 Il récupère une nouvelle IP
+
+👉 Changer le fond d’écran via GPO dans Active Directory
+cree le gpo
+configuration utilisateur_ Stratégies_Modeles d'administration_Bureau_Bureau_Papier peint du Bureau
