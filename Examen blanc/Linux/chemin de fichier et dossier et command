@@ -4,6 +4,15 @@ sudo /etc/hostname
 sudo /etc/hosts
 
 
+cree user
+sudo useradd nom_utilisateur
+
+changer ou modifier le mot de passe
+passwd
+sudo passwd nom_utilisateur
+🔄 Forcer un utilisateur à changer son mot de passe à la prochaine connexion
+sudo chage -d 0 nom_utilisateur
+
 intranet.conf
   sudo /etc/apache2/site-avilibale/intranet.conf
 
