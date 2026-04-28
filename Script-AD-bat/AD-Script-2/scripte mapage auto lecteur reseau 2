@@ -3,7 +3,7 @@ Voici un script simple (et compréhensible) pour mapper automatiquement un lecte
 ---
 🖥️ Dans CMD
 @echo off
-net user Z:\\AD01\partage
+net use Z:\\AD01\partage
 script.bat
 script.cmd
 
