@@ -1,0 +1,15 @@
+🔹 1. Vérifier que le VLAN 1 existe
+show vlan brief
+
+Tu verras normalement VLAN 1 déjà présent.
+
+🔹 2. Mettre un port dans le VLAN 1
+configure terminal
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 1
+🔹 3. Définir VLAN 1 comme native VLAN (sur un trunk)
+configure terminal
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk native vlan 1
