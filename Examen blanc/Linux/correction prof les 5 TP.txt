@@ -8,10 +8,12 @@ Bresil doit etre le groupe principal de neymar et pele
 France doit etre le groupe principal de platini
 les 3 users font aussi partie du groupe football
 
+!!POUR CREE GROUPS
 groupadd bresil
 groupadd france
 groupadd football
 
+!!pour cree user adduser demande auto matique mdp mais useradd ne demande pas 
 adduser neymar
 adduser pele
 adduser platini
