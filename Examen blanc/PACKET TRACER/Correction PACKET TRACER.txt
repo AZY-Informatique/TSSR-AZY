@@ -1,0 +1,84 @@
+Cours du 24 Avril
+
+TP A FAIRE SUR LES 4 SwITCH
+
+ACTIVER SSH - Desactiver TELNET
+Seul le reseau 192.168.99.0/24 PEUT MANAGER LES EQUIPEMENTS
+Creer un utilisateur => Admin:Reponse2025
+domaine =  examen.labo
+cle ssh : 2048 bits
+
+===============================================================================
+Reponse;
+
+Pre-requis 
+verifier ios de cisco ... vous devez trouver K9 dans le nom (show version)
+il doit y avoir un mot de passe enable
+le switch doit avoir une adresse ip
+
+1)si mon sw est un MDP ou no, si il n'y a pas un mdp, donc ssh ne fonction pas
+2)verifier si os est compatible 
+show veersion
+nom image=sw image===>K9 pour que le sw compatible a ssh
+3)do show run (si sw est un ip)
+!!par example 
+!!creation ip pour valan 99
+en
+conf t
+interface vlan 99
+ip address 192.168.99.21 255.255.255.0
+no shutdown
+
+!!creation de mdp SW
+en 
+conf t
+enable secret (mdp)
+
+
+en
+conf t
+!!Définir le domaine
+ip domain-name examen.labo
+
+!!Création de la clé SSH
+crypto key generate rsa general-keys modulus 2048
+!!Activation de ssh v2
+ip ssh version 2
+
+
+!! creation du compte admin ssh
+aaa new-model
+aaa authentication login default local
+aaa authorization exec default local
+username Admin secret Reponse2025
+
+!!Creer un acl pour le reseau autorisé
+access-list 22 permit 192.168.99.0 0.0.0.255
+
+
+!!active ssh (donc desactiver telnet)
+line vty 0 15
+login local
+transport input ssh
+!!Applique l'acl 22
+access-class 22 in
+===========================================================================
+
+Tester à faire 
+-Connection ssh vers switch à partir du pc portable => OK
+-Connection TELNET vers switch à partir du pc portable => PAS OK
+-Connection ssh vers switch à partir du pc DU VLAN 10 => PAS OK
+-PING entre Pc Portable et un serveur => OK
+
+etape1
+sur portable branche a vlan 99
+aller dans Desktop ==>telnet/ssh==>SSH==>ip de SW 19.168.99.21==>Admin ==>connect
+==>MDP=Reponse2025==>en==>MDP=CISCO ==>ca marche 
+mais pour quell'un que n'est pas dans cette VLAN je fiasla meme doit pas marche.
+
+
+TP - A FAIRE
+Uniquement le VLAN 99 peut pinguer les 2 serveurs 
+SEUL LEs PROTOCOLEs smtp ET pop3 SONT AUTORISEs SUR LE SERVEUR mail pour le vlan 10
+ET SEUL HTTPS EST AUTORISe SUR LE SERVEUR web pour le vlan 10
+tout le reste est refusé
