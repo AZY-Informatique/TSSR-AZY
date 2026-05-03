@@ -15,4 +15,97 @@ chmod 771 Date
 !!! 7 Utilisateur, 7 Group, 1 Autre
 !!!Pour verifier
 ls -l
-  
+
+
+!!!chemin de stockage Ulitisateur-MDP, Group et log
+nano /etc/passwd
+nano /etc/groups
+nano /var/log
+
+Bonne question 👍 — **les deux commandes `chmod` et `chown` fonctionnent à la fois sur les fichiers ET les dossiers**.
+
+---
+
+## 📁 1. `chmod` (changer les permissions)
+
+👉 Sert à définir **qui peut lire, écrire ou exécuter**
+
+* fonctionne sur :
+
+  * fichiers ✅
+  * dossiers ✅
+
+### Exemple :
+
+```bash
+chmod 644 fichier.txt
+chmod 755 dossier/
+```
+
+👉 Différence importante :
+
+* Sur un **fichier** :
+
+  * `r` = lire
+  * `w` = modifier
+  * `x` = exécuter
+
+* Sur un **dossier** :
+
+  * `r` = voir le contenu
+  * `w` = ajouter/supprimer des fichiers
+  * `x` = entrer dans le dossier
+
+---
+
+## 👤 2. `chown` (changer le propriétaire)
+
+👉 Sert à changer :
+
+* le propriétaire (user)
+
+* le groupe
+
+* fonctionne sur :
+
+  * fichiers ✅
+  * dossiers ✅
+
+### Exemple :
+
+```bash
+chown user1 fichier.txt
+chown user1:group1 dossier/
+```
+
+---
+
+## 🔁 Appliquer à tout un dossier (très utilisé)
+
+Si tu veux appliquer aux dossiers + fichiers à l’intérieur :
+
+```bash
+chmod -R 755 dossier/
+chown -R user1:group1 dossier/
+```
+
+👉 `-R` = récursif (tout le contenu)
+
+---
+
+## ⚠️ Attention
+
+* `chmod` change les permissions
+* `chown` change le propriétaire
+  👉 ce sont deux choses différentes
+
+---
+
+## 🧠 Résumé simple
+
+* `chmod` → droits (lecture, écriture, exécution)
+* `chown` → propriétaire
+* les deux → fichiers + dossiers
+
+---
+
