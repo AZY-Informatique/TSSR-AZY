@@ -1,0 +1,30 @@
+Un fichier log (ou journal) est un fichier qui enregistre automatiquement ce qui se passe dans un système, un logiciel ou un serveur.
+
+🧾 À quoi ça sert ?
+
+C’est un peu comme une “boîte noire” :
+
+Il garde une trace des événements (démarrage, erreurs, connexions…)
+Il aide à déboguer quand quelque chose ne marche pas
+Il permet de surveiller la sécurité (tentatives de connexion, activités suspectes)
+🧠 Exemple simple
+
+Un site web peut enregistrer dans un log :
+
+Qui s’est connecté
+À quelle heure
+Depuis quelle adresse IP
+Si une erreur s’est produite
+
+👉 Exemple de ligne de log :
+
+2026-05-03 14:22:10 - ERROR - Échec de connexion utilisateur admin (mot de passe incorrect)
+📂 Types de logs courants
+Logs système : fonctionnement du système d’exploitation
+Logs applicatifs : activité d’un logiciel ou d’une app
+Logs serveur : requêtes web, accès, erreurs
+Logs de sécurité : connexions, alertes
+⚠️ Important
+Les logs peuvent contenir des infos sensibles (IP, identifiants…)
+Ils peuvent devenir très volumineux
+Il faut souvent des outils pour les analyser
