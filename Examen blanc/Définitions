@@ -1,0 +1,183 @@
+Voici des **définitions très courtes + un exemple simple** pour chaque terme 👇
+
+---
+
+## 🌐 Réseau / Infra
+
+**IP**
+👉 Adresse unique d’une machine sur le réseau
+✔️ Exemple : `192.168.1.10`
+
+**Subnet (sous-réseau)**
+👉 Découpe du réseau en parties
+✔️ Exemple : `192.168.1.0/24`
+
+**IPv4**
+👉 Ancien format IP (32 bits)
+✔️ Exemple : `192.168.0.1`
+
+**IPv6**
+👉 Nouveau format IP (plus grand)
+✔️ Exemple : `2001:db8::1`
+
+**VLAN**
+👉 Réseau virtuel séparé
+✔️ Exemple : VLAN 10 = service IT, VLAN 20 = invités
+
+**WiFi**
+👉 Réseau sans fil
+✔️ Exemple : connexion via routeur maison
+
+**WDS (Wireless Distribution System)**
+👉 Relie plusieurs points WiFi entre eux
+✔️ Exemple : étendre le WiFi dans une grande maison
+
+---
+
+## 🖥️ Systèmes / OS
+
+**Debian**
+👉 Système Linux stable
+✔️ Exemple : serveur web sous Debian
+
+**Alpine Linux**
+👉 Linux léger (souvent en Docker)
+✔️ Exemple : conteneur minimal
+
+---
+
+## 🌍 Serveurs / Web
+
+**NGINX**
+👉 Serveur web rapide / reverse proxy
+✔️ Exemple : servir un site web
+
+**Apache HTTP Server / Apache2**
+👉 Serveur web classique
+✔️ Exemple : héberger un site PHP
+
+**.htaccess**
+👉 Fichier config Apache
+✔️ Exemple : redirection URL
+
+**HAProxy**
+👉 Répartit le trafic entre serveurs
+✔️ Exemple : 2 serveurs web derrière
+
+---
+
+## 🗄️ Base de données
+
+**MariaDB**
+👉 Base de données (comme MySQL)
+✔️ Exemple : stocker utilisateurs d’un site
+
+---
+
+## 🔐 Sécurité / Accès
+
+**SSH**
+👉 Accès distant sécurisé
+✔️ Exemple : `ssh user@server`
+
+**SSL/TLS**
+👉 Chiffrement des communications
+✔️ Exemple : HTTPS 🔒
+
+**SECU (sécurité)**
+👉 Protection système/réseau
+✔️ Exemple : firewall + mises à jour
+
+---
+
+## 🌐 Services réseau
+
+**DNS**
+👉 Traduit nom → IP
+✔️ Exemple : google.com → 8.8.8.8
+
+**DHCP**
+👉 Donne IP automatiquement
+✔️ Exemple : box internet attribue IP
+
+**FTP**
+👉 Transfert de fichiers
+✔️ Exemple : envoyer site web
+
+**Samba**
+👉 Partage fichiers Windows/Linux
+✔️ Exemple : dossier partagé réseau
+
+---
+
+## 🧰 Virtualisation / DevOps
+
+**Proxmox VE**
+👉 Créer machines virtuelles
+✔️ Exemple : plusieurs serveurs sur 1 machine
+
+**Vagrant**
+👉 Créer environnements dev rapidement
+✔️ Exemple : VM pour tester projet
+
+---
+
+## 🔧 Réseau avancé / entreprise
+
+**Cisco**
+👉 Équipements réseau pro
+✔️ Exemple : switch Cisco en entreprise
+
+**HSRP**
+👉 Redondance routeur (backup automatique)
+✔️ Exemple : 2 routeurs → 1 actif, 1 secours
+
+---
+
+## 🧠 Active Directory
+
+**AGDLP**
+👉 Méthode gestion droits
+✔️ Exemple : User → Group → Permission
+
+**FSMO**
+👉 Rôles spéciaux AD
+✔️ Exemple : contrôleur principal
+
+---
+
+## 💻 Programmation / Web
+
+**PHP**
+👉 Langage web serveur
+✔️ Exemple : site dynamique
+
+**RegEx (expressions régulières)**
+👉 Recherche de texte
+✔️ Exemple : vérifier email
+
+---
+
+## 📡 Réseau / sécurité avancée
+
+**pfSense**
+👉 Firewall/routeur
+✔️ Exemple : sécuriser réseau entreprise
+
+**FOG Project**
+👉 Déployer OS sur plusieurs PC
+✔️ Exemple : installer Windows sur 20 machines
+
+---
+
+## ⚡ Résumé rapide
+
+👉 Tu dois retenir :
+
+* IP / DNS / DHCP = base réseau
+* Nginx / Apache = web
+* SSH / SSL = sécurité
+* VLAN / HSRP = réseau avancé
+* Proxmox = virtualisation
+
+---
