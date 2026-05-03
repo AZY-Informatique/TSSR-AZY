@@ -1,0 +1,18 @@
+!!!commande pour voir Disck Dur
+lsblk
+
+!!!commande pour mettre un utulisateur dans un group
+sudo usermod -aG group utilisateur
+!!!Pour verifier
+nano /etc/groups
+
+
+!!!donnes a une fichier droit de execution
+1 Metod;                                    2 Metod;
+ls                                          chmod 771 /home/azy/Document/Data
+cd document
+chmod 771 Date 
+!!! 7 Utilisateur, 7 Group, 1 Autre
+!!!Pour verifier
+ls -l
+  
