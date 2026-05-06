@@ -1,0 +1,101 @@
+ **résolution de nom (DNS ou NetBIOS)** plutôt que les permissions NTFS.
+
+---
+
+### 🔧 Ce qui se passe concrètement
+
+Quand un utilisateur tape :
+
+```
+\\SERVEUR\Partage
+```
+
+Le poste doit d’abord **trouver l’adresse IP de "SERVEUR"** avant d’accéder au partage.
+
+Il fait donc une **résolution de nom** via :
+
+* DNS (principal en entreprise)
+* ou parfois NetBIOS / cache local
+
+---
+
+### ❌ Si ça ne marche plus par nom
+
+Cela veut dire que :
+
+* le nom **SERVEUR n’est plus résolu en IP**
+* donc Windows ne sait pas où aller
+
+Mais le serveur peut très bien être encore fonctionnel.
+
+---
+
+### 🧪 Le test clé (très important en diagnostic)
+
+👉 On teste directement :
+
+```
+\\192.168.1.10\Partage
+```
+
+* ✔️ Si ça fonctionne → le serveur est OK
+* ❌ Si ça ne fonctionne pas → problème réseau/partage/permissions
+
+---
+
+### 🧠 Conclusion logique
+
+Si :
+
+* accès par **IP = OK**
+* accès par **nom = KO**
+
+👉 alors le problème est presque toujours :
+➡️ **DNS (ou résolution de nom)**
+
+---
+
+### ⚠️ Causes possibles côté DNS
+
+* entrée DNS supprimée ou incorrecte
+* serveur DNS inaccessible
+* enregistrement A absent ou expiré
+* cache DNS corrompu (poste client ou serveur)
+* mauvais suffixe DNS (ex : domaine mal configuré)
+* DHCP qui distribue un mauvais DNS
+
+---
+
+### 🛠️ Vérifications rapides
+
+Sur un poste client :
+
+```bash
+nslookup SERVEUR
+```
+
+ou
+
+```bash
+ping SERVEUR
+```
+
+Et aussi :
+
+```bash
+ipconfig /flushdns
+```
+
+accès via IP → OK
+accès via nom → KO
+---
+
+### 💡 Résumé simple
+
+* NTFS → droits d’accès (après connexion)
+* DNS → permet de trouver le serveur (avant connexion)
+
+👉 Donc ici, comme l’accès par IP fonctionne :
+➡️ le problème est **avant l’accès au partage**
+➡️ donc **DNS / résolution de nom**
+
