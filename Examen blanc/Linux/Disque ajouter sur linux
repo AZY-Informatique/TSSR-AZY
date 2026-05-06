@@ -1,0 +1,35 @@
+## 🎯 Objectif
+Utiliser ton 2ᵉ disque (**sdb**) dans Linux
+
+### 1. Voir le disque
+lsblk
+👉 tu dois voir **sdb**
+### 2. Créer une “partie” du disque
+sudo fdisk /dev/sdb
+
+### Dans fdisk :
+### Dans fdisk :
+### n → nouvelle partition
+### p → primaire
+### Entrée (par défaut)
+### w → sauvegarder
+### Puis tape :
+n
+Enter
+Enter
+w
+👉 Résultat : /dev/sdb1
+👉 ça crée **sdb1**
+🔹 3. Formater le disque (exemple en ext4, le plus courant)
+sudo mkfs.ext4 /dev/sdb1
+### 4. Créer un dossier
+sudo mkdir /mnt/data
+### 5. Activer le disque
+sudo mount /dev/sdb1 /mnt/data
+👉 Maintenant ton disque est utilisable dans **/mnt/data**
+## ✅ Résultat
+Ton 2ᵉ disque fonctionne 👍
+## 🧠 À retenir
+* **sdb** = disque
+* **sdb1** = partition
+* **mount** = rendre utilisable
